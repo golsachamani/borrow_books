@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <div class="col-4 m-5">
+        <div class="card" style="width: 100%;">
+          <img src="{{ author.img.url }}" class="card-img-top" alt="{{ author.fullname }} image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ author.fullname }}</h5>
+            <p class="card-text">{{ author.short_desc }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    {% for book in author.book_set.all %}
+      <div class="col-4 m-5">
+       {% include 'book.html' %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

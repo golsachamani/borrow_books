@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row d-flex justify-content-center">
+    {% for book in genre.book.all %}
+      <div class="col-4 m-5">
+        {% include 'book.html' %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
