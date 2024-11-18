@@ -1,6 +1,8 @@
+
 {% extends 'base.html' %}
+
 {% block content %}
-  <div class="profile-container">
+<div class="profile-container">
     <a href="{{ profile.get_absolute_url }}">{{ profile.nikename }}'s Profile</a>
 
     <div class="profile-picture">
@@ -9,7 +11,7 @@
       {% else %}
         <p>No profile picture uploaded.</p>
       {% endif %}
-    </div>
+</div>
 
     <div class="profile-details">
       <p>
@@ -20,14 +22,17 @@
       </p>
     </div>
     <ul>
-      {% for book_instance in borrowed_books %}
-          <li>
-              <strong>{{ book_instance.instance_of }}</strong><br>
-              Borrowed on: {{ book_instance.borrow_due_time }}<br>
-              Due by: {{ book_instance.borrow_due_time }}
-          </li>
-      {% empty %}
-          <p>You have not borrowed any books yet.</p>
-      {% endfor %}
-    </div>
+        {% for book_instance in borrowed_books %}
+            <li>
+                <strong>{{ book_instance.instance_of }}</strong> 
+                <br>
+                Borrowed on: {{ book_instance.borrow_due_time }}
+                
+            </li>
+        {% empty %}
+            <p>You have not borrowed any books yet.</p>
+        {% endfor %}
+      </ul>
+    
+
 {% endblock %}

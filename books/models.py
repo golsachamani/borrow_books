@@ -32,7 +32,7 @@ class Genre(models.Model):
 class Author(models.Model):
     fullname = models.CharField(max_length=127, unique=True)
     birth_date = models.DateField(null=True, blank=True)
-    img = models.ImageField(upload_to='authors.image',null=True,blank=True)
+    img = models.ImageField(upload_to='authors.image', null=True, blank=True)
 
     class Meta:
         constraints = [
@@ -56,7 +56,7 @@ class Book(models.Model):
     pages = models.PositiveIntegerField()
     genre = models.ManyToManyField(Genre, related_name="book")
     published_at = models.DateTimeField()
-    img = models.ImageField(upload_to= 'books.image' ,null=True)
+    img = models.ImageField(upload_to='books.image', null=True)
     short_desc = models.TextField(max_length=1023, null=True)
 
     def __str__(self):
@@ -70,6 +70,7 @@ class Book(models.Model):
 
     def get_genres(self):
         return [genre.name for genre in self.genre.all()]
+    get_genres.short_description = "genres"
 
     @property
     def instances(self):
@@ -89,8 +90,6 @@ class Book(models.Model):
 
         availables[0].borrow(user, due_time)
 
-    get_genres.short_description = "genres"
-
 
 class BookInstaceStatus:
     Available = "available"
@@ -100,7 +99,8 @@ class BookInstaceStatus:
 
 class BookInstace(models.Model):
     book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True)
-    borrower = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
+    borrower = models.ForeignKey(
+        User, on_delete=models.RESTRICT, null=True, blank=True)
     borrow_due_time = models.DateField(null=True, blank=True)
     maintain_due_time = models.DateField(null=True, blank=True)
 
